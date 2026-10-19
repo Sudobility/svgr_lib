@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import {
   svgrKeys,
+  useCancelJob,
   useCreateJob,
   useImageJobs,
   useJobStatus,
@@ -95,6 +96,8 @@ export interface UseImageConverterReturn extends ImageConverterState {
   upload: (file: File) => Promise<void>;
   /** Create a conversion job with current settings. Image must be uploaded first. */
   convert: () => void;
+  /** Cancel the job currently being tracked, if any is still in progress. */
+  cancel: () => void;
   /** Reset all state. */
   reset: () => void;
   /** Switch preview to a different job's results. */
@@ -127,6 +130,7 @@ export function useImageConverter(
   const queryClient = useQueryClient();
   const uploadMutation = useUploadImage(client);
   const createJobMutation = useCreateJob(client);
+  const cancelMutation = useCancelJob(client);
 
   const [quality, setQuality] = useState(QUALITY_DEFAULT);
   const [transparentBg, setTransparentBgState] = useState(false);
@@ -255,6 +259,15 @@ export function useImageConverter(
     createJobMutation,
   ]);
 
+  const cancel = useCallback(() => {
+    if (!currentJobId) return;
+    const status = currentJob?.status;
+    if (status === 'done' || status === 'error' || status === 'cancelled') {
+      return;
+    }
+    cancelMutation.mutate(currentJobId);
+  }, [currentJobId, currentJob?.status, cancelMutation]);
+
   const reset = useCallback(() => {
     setImageId(null);
     setCurrentJobId(null);
@@ -302,7 +315,8 @@ export function useImageConverter(
     createJobMutation.isPending ||
     (currentJob !== null &&
       currentJob.status !== 'done' &&
-      currentJob.status !== 'error');
+      currentJob.status !== 'error' &&
+      currentJob.status !== 'cancelled');
 
   return {
     quality,
@@ -328,6 +342,7 @@ export function useImageConverter(
     setImageType,
     upload,
     convert,
+    cancel,
     reset,
     selectJob,
     fetchSvg,
