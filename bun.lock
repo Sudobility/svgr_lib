@@ -6,9 +6,9 @@
       "name": "@sudobility/svgr_lib",
       "devDependencies": {
         "@eslint/js": "^9.39.2",
-        "@sudobility/svgr_client": "^1.0.54",
-        "@sudobility/svgr_types": "^1.0.32",
-        "@sudobility/types": "^1.9.68",
+        "@sudobility/svgr_client": "^1.0.57",
+        "@sudobility/svgr_types": "^1.0.34",
+        "@sudobility/types": "^1.9.74",
         "@tanstack/react-query": "^5.90.5",
         "@types/node": "^24.9.1",
         "@types/react": "^19.2.2",
@@ -24,9 +24,9 @@
         "vitest": "^4.0.4",
       },
       "peerDependencies": {
-        "@sudobility/svgr_client": "^1.0.54",
-        "@sudobility/svgr_types": "^1.0.32",
-        "@sudobility/types": "^1.9.68",
+        "@sudobility/svgr_client": "^1.0.57",
+        "@sudobility/svgr_types": "^1.0.34",
+        "@sudobility/types": "^1.9.74",
         "@tanstack/react-query": ">=5.0.0",
         "react": ">=18.0.0",
       },
@@ -207,11 +207,11 @@
 
     "@standard-schema/spec": ["@standard-schema/spec@1.1.0", "", {}, "sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w=="],
 
-    "@sudobility/svgr_client": ["@sudobility/svgr_client@1.0.54", "", { "dependencies": { "@sudobility/svgr_types": "^1.0.32" }, "peerDependencies": { "@sudobility/types": "^1.9.68", "@tanstack/react-query": "^5.0.0", "react": "^18.0.0 || ^19.0.0" } }, "sha512-HWeM60nzHkdNkFPE6v3mabAA6oYQnis+JIIwCogHJb+RipV9muCE0fWSboeWKewqKmkFUSfrmoP0uWePvCy9iA=="],
+    "@sudobility/svgr_client": ["@sudobility/svgr_client@1.0.57", "https://npm.pkg.github.com/download/@sudobility/svgr_client/1.0.57/59461805bf96382c815818d5bffd391b686fff3f", { "peerDependencies": { "@sudobility/svgr_types": "^1.0.34", "@sudobility/types": "^1.9.74", "@tanstack/react-query": "^5.0.0", "react": "^18.0.0 || ^19.0.0" } }, "sha512-fTF73V6GpWNM0ZnPD/V0X1/tdFxuH50yHD/yRSho8s0W6QTtyfw8IQVAifwO/Ymd3lBLkUQxhFvKzMlSHXH5Kw=="],
 
-    "@sudobility/svgr_types": ["@sudobility/svgr_types@1.0.32", "", { "peerDependencies": { "@sudobility/types": "^1.9.68" } }, "sha512-dVPwDBL3Icn7ip/1DYMAqkLJ5GMI8vXPluJ2Uvs9YJCaB9PWjQyOTfxOnXyB9dANJephOHHN87Kct+QuvF3scw=="],
+    "@sudobility/svgr_types": ["@sudobility/svgr_types@1.0.34", "https://npm.pkg.github.com/download/@sudobility/svgr_types/1.0.34/664879061a150a443a833acf34198e59c59e051c", { "peerDependencies": { "@sudobility/types": "^1.9.74" } }, "sha512-KzzF3Mcc0s1/4JLhgNh4PZpP7JmqWe6RnukRCTUUZC6aU6ITDzMhIkx5sRTX04H75LKm4hX9D0oQcR1FZvnUoQ=="],
 
-    "@sudobility/types": ["@sudobility/types@1.9.68", "", {}, "sha512-4LL5+UfcqQcc0PKKR/z/PqS6j9DQPVkkjL+3oOW+Bwx0TAu1SVKAlPhlt/9ruNMW+abcHuZoFvbOVD5gdYBSGw=="],
+    "@sudobility/types": ["@sudobility/types@1.9.74", "https://npm.pkg.github.com/download/@sudobility/types/1.9.74/f9ad864ba5d8d1097e7e48378ebee8aa7e129e88", {}, "sha512-jgt0F1r71qjFNiRNn/1YlL4JU65sjnzYd8Sfi+Y9z62Lu9VhIXeqWAH12u7/hmGPZqG3nxzn0V+s3sFkB1qWuQ=="],
 
     "@tanstack/query-core": ["@tanstack/query-core@5.90.20", "", {}, "sha512-OMD2HLpNouXEfZJWcKeVKUgQ5n+n3A2JFmBaScpNDUqSrQSjiveC7dKMe53uJUg1nDG16ttFPz2xfilz6i2uVg=="],
 
