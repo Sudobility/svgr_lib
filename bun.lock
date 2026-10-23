@@ -6,9 +6,9 @@
       "name": "@sudobility/svgr_lib",
       "devDependencies": {
         "@eslint/js": "~9.39.5",
-        "@sudobility/svgr_client": "^1.0.59",
-        "@sudobility/svgr_types": "^1.0.36",
-        "@sudobility/types": "^1.9.75",
+        "@sudobility/svgr_client": "^1.0.60",
+        "@sudobility/svgr_types": "^1.0.37",
+        "@sudobility/types": "^1.9.76",
         "@tanstack/react-query": "~5.104.5",
         "@types/node": "~24.19.2",
         "@types/react": "~19.3.0",
@@ -17,16 +17,16 @@
         "eslint": "~9.39.5",
         "eslint-config-prettier": "~10.1.8",
         "eslint-plugin-prettier": "~5.5.7",
-        "eslint-plugin-react-hooks": "~7.1.1",
+        "eslint-plugin-react-hooks": "~7.0.1",
         "prettier": "~3.9.10",
         "react": "~19.3.1",
         "typescript": "~5.9.3",
         "vitest": "~4.1.12",
       },
       "peerDependencies": {
-        "@sudobility/svgr_client": "^1.0.59",
-        "@sudobility/svgr_types": "^1.0.36",
-        "@sudobility/types": "^1.9.75",
+        "@sudobility/svgr_client": "^1.0.60",
+        "@sudobility/svgr_types": "^1.0.37",
+        "@sudobility/types": "^1.9.76",
         "@tanstack/react-query": ">=5.0.0",
         "react": ">=18.0.0",
       },
@@ -143,11 +143,11 @@
 
     "@standard-schema/spec": ["@standard-schema/spec@1.1.0", "", {}, "sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w=="],
 
-    "@sudobility/svgr_client": ["@sudobility/svgr_client@1.0.59", "https://npm.pkg.github.com/download/@sudobility/svgr_client/1.0.59/47868eaaec4e5bf5b01906265f1110e7d99d1560", { "peerDependencies": { "@sudobility/svgr_types": "^1.0.36", "@sudobility/types": "^1.9.75", "@tanstack/react-query": "^5.0.0", "react": "^18.0.0 || ^19.0.0" } }, "sha512-qu589QI2fRjKtyIvPeb5uej0/qiBLQtDr8qMJp3p7mKDdQq64Fy5+vXFhpwX08R3GHqmtB3esPk+rkyUTh0ayQ=="],
+    "@sudobility/svgr_client": ["@sudobility/svgr_client@1.0.60", "https://npm.pkg.github.com/download/@sudobility/svgr_client/1.0.60/77b38b5b13b475745f464e0eab6be2ee4b491aa9", { "peerDependencies": { "@sudobility/svgr_types": "^1.0.37", "@sudobility/types": "^1.9.76", "@tanstack/react-query": "^5.0.0", "react": "^18.0.0 || ^19.0.0" } }, "sha512-GG7nNWYO96hW1FxjqmYzqQzPdvZ4tBtFyTkmso/2Wga/fBCy9EbdbWUd+vWefdWf1CCUBMkJTA+Dqr1IVUPunA=="],
 
-    "@sudobility/svgr_types": ["@sudobility/svgr_types@1.0.36", "https://npm.pkg.github.com/download/@sudobility/svgr_types/1.0.36/0e825f0d8c7eb6ac91634801571fc30a4f3c789d", { "peerDependencies": { "@sudobility/types": "^1.9.75" } }, "sha512-M4RFfv2GECwDlMRVn0XPF00kca39x4TONJjZXcn7PvemSnAxMOpaUhfCpvFu4b/xHrVhKAKHQTPPxjBAR3+Zkw=="],
+    "@sudobility/svgr_types": ["@sudobility/svgr_types@1.0.37", "https://npm.pkg.github.com/download/@sudobility/svgr_types/1.0.37/903222fcacd4d13a8cff39f6e11d8d0550119e14", { "peerDependencies": { "@sudobility/types": "^1.9.76" } }, "sha512-B5yLPd7BiggV4qRvQTCzmm1ebCOMTPiETwFoSbsT4ZOn7OyxE0Rm2Xml/N05MPpGU9KzYpHADRhahsKvoENnOQ=="],
 
-    "@sudobility/types": ["@sudobility/types@1.9.75", "https://npm.pkg.github.com/download/@sudobility/types/1.9.75/d041222e1a9c48b1857a25686361fa493265e572", {}, "sha512-c0IqHhNsyMxWFzv+sC8drTXid1s/yberzme5JJTYIR2CE+DxpnjFCyL0AIMKUwTQYhYKvRZG0JkWRFplirbBrw=="],
+    "@sudobility/types": ["@sudobility/types@1.9.76", "https://npm.pkg.github.com/download/@sudobility/types/1.9.76/71635156f72fd9461107d5f147b3dc1c49f863d0", {}, "sha512-b7maZHR5wM84VlQ+l9R+2guzSOrExog6OUNy1oCe7h0abW13syycmnLQL0g+qql0aQ84qTB4A0mJelhY3Vef4Q=="],
 
     "@tanstack/query-core": ["@tanstack/query-core@5.104.5", "", {}, "sha512-Q94gI8Opd+CbdVNOdj8ZCyV8WqLYitrDq1t96Xc8WZT6lY0r5iRnJLXYDxMex7EEf2v+mXvn4FcjaBKSxXZQ9A=="],
 
@@ -259,7 +259,7 @@
 
     "eslint-plugin-prettier": ["eslint-plugin-prettier@5.5.7", "", { "dependencies": { "prettier-linter-helpers": "^1.0.1", "synckit": "^0.12.3" }, "peerDependencies": { "@types/eslint": ">=8.0.0", "eslint": ">=8.0.0", "eslint-config-prettier": ">= 7.0.0 <10.0.0 || >=10.1.0", "prettier": ">=3.0.0" }, "optionalPeers": ["@types/eslint", "eslint-config-prettier"] }, "sha512-WjHyn3GrFd+ZR0rzsLiM4zJZ35PZMOE0SUIxzGmnWNG0126yNfJKJzObmmkYDwHJfGlkz3PSlzyG9ez/LJntwg=="],
 
-    "eslint-plugin-react-hooks": ["eslint-plugin-react-hooks@7.1.1", "", { "dependencies": { "@babel/core": "^7.24.4", "@babel/parser": "^7.24.4", "hermes-parser": "^0.25.1", "zod": "^3.25.0 || ^4.0.0", "zod-validation-error": "^3.5.0 || ^4.0.0" }, "peerDependencies": { "eslint": "^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0 || ^9.0.0 || ^10.0.0" } }, "sha512-f2I7Gw6JbvCexzIInuSbZpfdQ44D7iqdWX01FKLvrPgqxoE7oMj8clOfto8U6vYiz4yd5oKu39rRSVOe1zRu0g=="],
+    "eslint-plugin-react-hooks": ["eslint-plugin-react-hooks@7.0.1", "", { "dependencies": { "@babel/core": "^7.24.4", "@babel/parser": "^7.24.4", "hermes-parser": "^0.25.1", "zod": "^3.25.0 || ^4.0.0", "zod-validation-error": "^3.5.0 || ^4.0.0" }, "peerDependencies": { "eslint": "^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0 || ^9.0.0" } }, "sha512-O0d0m04evaNzEPoSW+59Mezf8Qt0InfgGIBJnpC0h3NH/WjUAR7BIKUfysC6todmtiZ/A0oUVS8Gce0WhBrHsA=="],
 
     "eslint-scope": ["eslint-scope@8.4.0", "", { "dependencies": { "esrecurse": "^4.3.0", "estraverse": "^5.2.0" } }, "sha512-sNXOfKCn74rt8RICKMvJS7XKV/Xk9kA7DyJr8mJik3S7Cwgy3qlkkmyS2uQB3jiJg6VNdZd/pDBJu0nvG2NlTg=="],
 
