@@ -6,7 +6,7 @@
       "name": "@sudobility/svgr_lib",
       "devDependencies": {
         "@eslint/js": "~10.0.1",
-        "@sudobility/svgr_client": "^1.0.63",
+        "@sudobility/svgr_client": "^1.0.64",
         "@sudobility/svgr_types": "^1.0.38",
         "@sudobility/types": "^1.9.76",
         "@tanstack/react-query": "~5.104.5",
@@ -24,7 +24,7 @@
         "vitest": "~4.1.12",
       },
       "peerDependencies": {
-        "@sudobility/svgr_client": "^1.0.63",
+        "@sudobility/svgr_client": "^1.0.64",
         "@sudobility/svgr_types": "^1.0.38",
         "@sudobility/types": "^1.9.76",
         "@tanstack/react-query": ">=5.0.0",
@@ -149,7 +149,7 @@
 
     "@standard-schema/spec": ["@standard-schema/spec@1.1.0", "", {}, "sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w=="],
 
-    "@sudobility/svgr_client": ["@sudobility/svgr_client@1.0.63", "https://npm.pkg.github.com/download/@sudobility/svgr_client/1.0.63/32bc868f6ef0976dfb695114603bdbf1155435dc", { "peerDependencies": { "@sudobility/svgr_types": "^1.0.38", "@sudobility/types": "^1.9.76", "@tanstack/react-query": "^5.0.0", "react": "^18.0.0 || ^19.0.0" } }, "sha512-34DvtbNFPgaxzWZGGP9ug+UYQsdWr+ZQoQx5Esx3OOqdkb9i0JDjpmHLxMhmX74GhdgiIPD+69Uap9TcKm5H4w=="],
+    "@sudobility/svgr_client": ["@sudobility/svgr_client@1.0.64", "https://npm.pkg.github.com/download/@sudobility/svgr_client/1.0.64/f32942cfe12449a1cbed21c0c9648781d47f83a0", { "peerDependencies": { "@sudobility/svgr_types": "^1.0.38", "@sudobility/types": "^1.9.76", "@tanstack/react-query": "^5.0.0", "react": "^18.0.0 || ^19.0.0" } }, "sha512-nPEZ8KJH/j0QL+73Obug0UZ8+pj68fcJirM9Azk5CguzItyR2GeLmXA2RwLEY+ZKq2+qFVTemA/A3+6QBe38MQ=="],
 
     "@sudobility/svgr_types": ["@sudobility/svgr_types@1.0.38", "https://npm.pkg.github.com/download/@sudobility/svgr_types/1.0.38/c95c7f1726ac1c5733f4e3d01cabdea858ddcc76", { "peerDependencies": { "@sudobility/types": "^1.9.76" } }, "sha512-0zO9gEJNk3XjB0xgvfZ/wd2bYkOo3oNpU9RdTjL2/5IPF44ZqF6DzmOUQTDfJ9q0224FZtaPTtIB+1OlK2PPFg=="],
 
