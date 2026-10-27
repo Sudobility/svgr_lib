@@ -48,6 +48,8 @@ export default [
       'react-hooks': reactHooks,
     },
     rules: {
+      'preserve-caught-error': 'off',
+      'no-useless-assignment': 'off',
       ...typescript.configs.recommended.rules,
       ...prettierConfig.rules,
 
@@ -106,6 +108,8 @@ export default [
       },
     },
     rules: {
+      'preserve-caught-error': 'off',
+      'no-useless-assignment': 'off',
       '@typescript-eslint/no-explicit-any': 'off',
       'no-console': 'off',
     },
@@ -113,6 +117,8 @@ export default [
   {
     files: ['**/*.js'],
     rules: {
+      'preserve-caught-error': 'off',
+      'no-useless-assignment': 'off',
       '@typescript-eslint/no-var-requires': 'off',
     },
   },
