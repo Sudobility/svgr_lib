@@ -6,7 +6,7 @@
       "name": "@sudobility/svgr_lib",
       "devDependencies": {
         "@eslint/js": "~10.0.1",
-        "@sudobility/svgr_client": "^1.0.66",
+        "@sudobility/svgr_client": "^1.0.67",
         "@sudobility/svgr_types": "^1.0.39",
         "@sudobility/types": "^1.9.78",
         "@tanstack/react-query": "~5.104.5",
@@ -24,7 +24,7 @@
         "vitest": "~4.1.12",
       },
       "peerDependencies": {
-        "@sudobility/svgr_client": "^1.0.66",
+        "@sudobility/svgr_client": "^1.0.67",
         "@sudobility/svgr_types": "^1.0.39",
         "@sudobility/types": "^1.9.78",
         "@tanstack/react-query": ">=5.0.0",
@@ -149,7 +149,7 @@
 
     "@standard-schema/spec": ["@standard-schema/spec@1.1.0", "", {}, "sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w=="],
 
-    "@sudobility/svgr_client": ["@sudobility/svgr_client@1.0.66", "https://npm.pkg.github.com/download/@sudobility/svgr_client/1.0.66/3f569506c4bf435b6efe4792512b601c86035777", { "peerDependencies": { "@sudobility/svgr_types": "^1.0.39", "@sudobility/types": "^1.9.78", "@tanstack/react-query": "^5.0.0", "react": "^18.0.0 || ^19.0.0" } }, "sha512-CgTCFNB28idRdx6a0VucsWt8YJ01KoWsapHH+NuFKlnVSSulyVKCtqPFc02XJZt2vqzfCsEcUaVHNy14kFbpLA=="],
+    "@sudobility/svgr_client": ["@sudobility/svgr_client@1.0.67", "https://npm.pkg.github.com/download/@sudobility/svgr_client/1.0.67/90fa1e2fff3202d8294a7de9a73e0f943fb29edb", { "peerDependencies": { "@sudobility/svgr_types": "^1.0.39", "@sudobility/types": "^1.9.78", "@tanstack/react-query": "^5.0.0", "react": "^18.0.0 || ^19.0.0" } }, "sha512-QNFqoeYs1W49St/Sixoqr+lT4L8Jvdjp6HqXSdVyNWFcxdnJcbuUodgrwK63xCPIRP1XQUYde7L+1t6LRS5dew=="],
 
     "@sudobility/svgr_types": ["@sudobility/svgr_types@1.0.39", "https://npm.pkg.github.com/download/@sudobility/svgr_types/1.0.39/e9efbaa84c64918b6220325cddb1310c7398b172", { "peerDependencies": { "@sudobility/types": "^1.9.78" } }, "sha512-VMha2zOXOI9/LqvCVnsONeOfHfOnOhWcoV325c0VTKs6Z1JZWBE5LXmF7BeY4uDq8/ewr/xOxoEHpzmRQ61gyQ=="],
 
