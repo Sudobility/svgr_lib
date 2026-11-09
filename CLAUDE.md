@@ -3,136 +3,97 @@
 > **Git policy — never auto-commit or auto-push.** Leave your work in the working tree.
 > Run `git commit`, `git push`, `gh pr create`, or `scripts/push_all.sh` **only when the user
 > explicitly asks in that turn**. Approval for an earlier change does not carry forward, and
-> finishing a task is not permission to commit it.
+> finishing a task is not permission to commit it. Stay on the current branch; do not create
+> feature branches for code changes.
 
-Shared business logic for SVGR web and React Native apps.
+Shared, platform-agnostic business logic for the SVGR web and React Native apps.
 
-**npm**: `@sudobility/svgr_lib` (restricted, BUSL-1.1)
+**npm**: `@sudobility/svgr_lib` (private, BUSL-1.1). Published to **GitHub Packages**, not public npm.
 
-## Tech Stack
+## Tech stack
 
-- **Language**: TypeScript (strict mode, JSX)
-- **Runtime**: Bun
-- **Package Manager**: Bun (do not use npm/yarn/pnpm for installing dependencies)
-- **Build**: TypeScript compiler (ESM, `tsconfig.build.json`)
-- **Test**: Vitest
+- TypeScript (strict, JSX), ESM output only.
+- Runtime & package manager: **Bun** (never npm/yarn/pnpm to install).
+- Build: `tsc -p tsconfig.build.json` → `dist/` (JS + `.d.ts`).
+- Test: **Vitest**.
 
-## Project Structure
+## Commands (verified against package.json)
+
+```bash
+bun install
+bun run build         # tsc -p tsconfig.build.json → dist/
+bun run build:watch
+bun run clean         # rm -rf dist
+bun run test:unit     # vitest run  (there is NO `test` script)
+bun run test:watch
+bun run typecheck     # tsc --noEmit
+bun run lint          # eslint src --ext .ts,.tsx
+bun run lint:fix
+bun run format        # prettier --write
+```
+
+- **Do not run `bun test`** — it invokes Bun's built-in test runner, not Vitest. Use `bun run test:unit`.
+- Tests are colocated as `*.test.ts` next to sources and excluded from the build.
+
+## Layout
 
 ```
 src/
-├── index.ts                    # Main exports
-├── config/
-│   ├── index.ts                # Config exports
-│   ├── constants.ts            # App constants (name, domain, quality, image types)
-│   ├── constants.test.ts       # Constants tests
-│   └── types.ts                # Config type definitions
-├── hooks/
-│   ├── index.ts                # Hook exports
-│   └── useImageConverter.ts    # Main converter hook
-├── i18n/
-│   ├── index.ts                # i18n exports
-│   ├── config.ts               # i18n configuration (15 languages, namespaces)
-│   └── config.test.ts          # i18n config tests
-└── utils/
-    ├── index.ts                # Util exports
-    ├── validation.ts           # Input validation helpers
-    ├── validation.test.ts      # Validation tests
-    ├── svg.ts                  # SVG dimension parsing utilities
-    └── svg.test.ts             # SVG util tests
+├── index.ts            # all public exports
+├── config/             # constants.ts (APP_*, QUALITY_*, SUPPORTED_IMAGE_TYPES, MAX_PIXELS),
+│                       # presets.ts (CONVERSION_PRESETS), types.ts (SvgrAppConfig/Firebase/RevenueCat)
+├── hooks/              # useImageConverter.ts, useCommunities.ts
+├── i18n/               # config.ts (SUPPORTED_LANGUAGES, namespaces, hreflang map)
+└── utils/              # validation.ts, svg.ts, scale-image.ts (scaleImageWeb)
 ```
-
-## Commands
-
-```bash
-bun run build        # Build to dist/ (tsconfig.build.json)
-bun run clean        # Remove dist/
-bun run build:watch  # Watch mode
-bun test             # Run tests
-bun run lint         # Run ESLint
-bun run typecheck    # TypeScript check
-```
-
-## Key Constants
-
-- `APP_NAME`: `'SVGR'`
-- `APP_DOMAIN`: `'svgr.app'`
-- Quality range: 1-10, default 5
-- 5 supported image types (PNG, JPG, etc.)
-
-## Key Concepts
-
-### useImageConverter
-
-Main React hook managing the conversion workflow:
-- State: `quality`, `transparentBg`, `svgResult`, `error`
-- Delegates actual API calls to `@sudobility/svgr_client`'s `useConvert` hook
-- Consumed by both web (`svgr_app`) and native (`svgr_app_rn`) apps
-
-### i18n
-
-- 15 supported languages: en, zh, zh-hant, ja, ko, es, fr, de, it, pt, ru, sv, th, uk, vi
-- Namespace-based translation structure
-- Configuration shared between web and RN apps
-
-### Utils
-
-- `validation.ts` -- input file validation
-- `svg.ts` -- SVG dimension parsing from SVG strings
-
-## Peer Dependencies
-
-- `@sudobility/svgr_client` ^1.0.9
-- `@sudobility/svgr_types` ^1.0.4
-- `@sudobility/types` ^1.9.51
-- `@tanstack/react-query` >=5
-- `react` >=18
 
 ## Architecture
 
 ```
-svgr_types + svgr_client
-        ^
-        |
-    svgr_lib (this package)
-        ^
-        |
-  svgr_app + svgr_app_rn
+svgr_types + svgr_client  →  svgr_lib (this)  →  svgr_app (web) + svgr_app_rn (RN)
 ```
 
-## Related Projects
+- `useImageConverter(client, scaleImage?)` is the central abstraction. It takes an
+  `SvgrClient` and delegates all API/network work to `@sudobility/svgr_client` hooks
+  (`useUploadImage`, `useCreateJob`, `useJobStatus`, etc.) + React Query. It owns the
+  UI state machine: upload → convert → poll job → fetch preview/SVG; exposes
+  `upload/convert/cancel/reset/selectJob/fetchSvg` plus option setters.
+- `useCommunities(client, language, enabled?)` fetches + groups communities by platform.
+- Result is NOT held as an SVG string: completion yields `previewUrl` (JPEG object URL)
+  and `svgFilename`; call `fetchSvg()` to get the SVG `Blob` on demand.
 
-- **svgr_types** (`/Users/johnhuang/projects/svgr_types`) -- Shared type definitions; peer dependency
-- **svgr_client** (`/Users/johnhuang/projects/svgr_client`) -- API client SDK; peer dependency used by `useImageConverter` for API calls
-- **svgr_api** (`/Users/johnhuang/projects/svgr_api`) -- Backend server (indirect dependency via svgr_client)
-- **svgr_app** (`/Users/johnhuang/projects/svgr_app`) -- Web app; primary consumer of this package
-- **svgr_app_rn** (`/Users/johnhuang/projects/svgr_app_rn`) -- React Native app; primary consumer of this package
+## Key conventions & gotchas
 
-## Coding Patterns
+- **Platform-agnostic core.** Hooks/utils must not import browser- or Node-only APIs.
+  The browser-specific scaling impl lives in `scale-image.ts` as `scaleImageWeb`
+  (Canvas/`Image`/`document`) and is **injected** into `useImageConverter` via the
+  `ScaleImageFn` param — the RN app passes its own. Keep platform code at the edges.
+- **Quality is a 1–10 integer scale**: `QUALITY_MIN=1`, `QUALITY_MAX=10`, `QUALITY_DEFAULT=5`.
+  Never 0–100 or 0–1. These constants are the ecosystem's source of truth.
+- **Exactly 5 image input types** in `SUPPORTED_IMAGE_TYPES`: PNG, JPEG, WebP, BMP, GIF.
+  Adding one means updating that array AND the extension map in `getAcceptedFileExtensions`.
+  (Note: the `ImageType` values like `logo`/`auto` used by `supportsOcrOption` are a
+  *different* axis — conversion categories from svgr_types, not input MIME types.)
+- **File size cap is 15 MB** (`MAX_FILE_SIZE_MB` / `MAX_FILE_SIZE_BYTES`). `MAX_PIXELS` =
+  1,000,000 is the separate server pixel cap used by `scaleImageWeb`.
+- **15 supported languages** in `SUPPORTED_LANGUAGES`; namespaces are `['svgr','auth']`.
+  `LANGUAGE_HREFLANG_MAP` maps internal codes (`zh-hant`) → hreflang (`zh-Hant`) — critical
+  for web SEO; keep internal codes and hreflang values distinct where they differ.
+- **ESM-only**: imports use explicit `.js` extensions (source is `.ts`); keep this.
 
-- **`useImageConverter` hook** is the central abstraction -- manages `quality`, `transparentBg`, `svgResult`, and `error` state. Delegates API calls to svgr_client's `useConvert` hook.
-- **Validation utils** (`isValidImageType`) check file types against the `SUPPORTED_IMAGE_TYPES` constant
-- **SVG utils** (`getSvgDimensions`, `getSvgFileSize`) parse SVG strings to extract metadata
-- **i18n config** defines 15 supported languages with namespace-based translation structure. `LANGUAGE_HREFLANG_MAP` maps internal language codes to hreflang attribute values.
-- **`SUPPORTED_IMAGE_TYPES`** constant defines the 5 accepted image formats
-- ESM-only build output using `tsconfig.build.json`
+## Peer dependencies (consumers must provide)
 
-## Gotchas
+`@sudobility/svgr_client ^1.0.67`, `@sudobility/svgr_types ^1.0.39`,
+`@sudobility/types ^1.9.78`, `@tanstack/react-query >=5`, `react >=18`.
 
-- **Quality range**: `QUALITY_MIN=1`, `QUALITY_MAX=10`, `QUALITY_DEFAULT=5`. Do not use 0-100 or 0-1 scales. These constants are the source of truth for the entire SVGR ecosystem.
-- **Only 5 image types supported**: PNG, JPEG, WebP, BMP, GIF. Adding a new type requires updating `SUPPORTED_IMAGE_TYPES` and the validation logic.
-- **`LANGUAGE_HREFLANG_MAP`** maps internal language codes (e.g., `zh-hant`) to standard hreflang values (e.g., `zh-Hant`). This mapping is critical for SEO in the web app.
-- **Shared between web and React Native** -- do not import browser-specific or Node-specific APIs. Keep all code platform-agnostic.
-- Peer dependencies include `@sudobility/svgr_client`, `@sudobility/svgr_types`, `@sudobility/types`, `@tanstack/react-query`, and `react` -- consumers must provide all of these.
+## Publishing / CI
 
-## Testing Notes
+- `.npmrc` scopes `@sudobility` to `https://npm.pkg.github.com`; auth needs
+  `GH_PACKAGES_READ_TOKEN` (GitHub Packages read token).
+- `.github/workflows/ci-cd.yml` delegates to `johnqh/workflows` unified CI/CD with
+  `publish-target: github`. `prepublishOnly` runs `clean` + `build`.
 
-- Tests are in `src/config/constants.test.ts`, `src/i18n/config.test.ts`, `src/utils/validation.test.ts`, and `src/utils/svg.test.ts`
-- Test constants for correct values (quality range, supported types, app name)
-- Test validation functions with valid and invalid file types
-- Test SVG parsing utilities with various SVG string formats
-- Test i18n configuration for correct language codes and namespace setup
+## Related projects (siblings under the same parent dir)
 
-## Git Workflow
-
-- Do not use feature branches for code changes. Always stay on the current branch.
+`svgr_types` (types), `svgr_client` (API SDK), `svgr_api` (backend), `svgr_app` (web),
+`svgr_app_rn` (React Native). This package sits between the client/types and the apps.
