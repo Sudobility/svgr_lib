@@ -151,24 +151,34 @@ export function useImageConverter(
   const imageJobsQuery = useImageJobs(client, imageId);
   const jobs = imageJobsQuery.data?.data ?? [];
 
-  // When job completes, fetch the JPEG preview
+  // When the job completes, record the SVG filename and (web only) fetch the
+  // JPEG preview.
   useEffect(() => {
     if (!currentJob) return;
-    if (currentJob.status === 'done' && currentJob.previewFilename) {
+    if (currentJob.status === 'done') {
+      // Record the SVG filename as soon as the job is done. This must NOT be
+      // gated on previewFilename: the preview JPEG is a web-only thumbnail, and
+      // native clients render the SVG directly via fetchSvg/svgFilename. When a
+      // `done` poll arrived before previewFilename was ready, gating here left
+      // svgFilename unset — and because polling stops at the terminal status, it
+      // never recovered, so the converted SVG never appeared even though the job
+      // had finished (and showed in history).
       setSvgFilename(currentJob.svgFilename ?? null);
-      // Fetch preview JPEG
-      client
-        .fetchFile(currentJob.previewFilename)
-        .then(blob => {
-          const url = URL.createObjectURL(blob);
-          setPreviewUrl(prev => {
-            if (prev) URL.revokeObjectURL(prev);
-            return url;
+      // Fetch preview JPEG (web preview thumbnail only)
+      if (currentJob.previewFilename) {
+        client
+          .fetchFile(currentJob.previewFilename)
+          .then(blob => {
+            const url = URL.createObjectURL(blob);
+            setPreviewUrl(prev => {
+              if (prev) URL.revokeObjectURL(prev);
+              return url;
+            });
+          })
+          .catch(err => {
+            console.error('Failed to fetch preview:', err);
           });
-        })
-        .catch(err => {
-          console.error('Failed to fetch preview:', err);
-        });
+      }
       // Refresh job list
       queryClient.invalidateQueries({
         queryKey: svgrKeys.imageJobs(currentJob.imageId),
@@ -176,7 +186,11 @@ export function useImageConverter(
     } else if (currentJob.status === 'error') {
       setError(currentJob.errorMessage ?? 'Conversion failed');
     }
-  }, [currentJob?.status, currentJob?.previewFilename]);
+  }, [
+    currentJob?.status,
+    currentJob?.previewFilename,
+    currentJob?.svgFilename,
+  ]);
 
   const setTransparentBg = useCallback(
     (v: boolean) => {
